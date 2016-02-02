@@ -49,6 +49,8 @@ extern "C" {
             uint16_t max_angle_inclination, rollAndPitchTrims_t *angleTrim, rxConfig_t *rxConfig);            // pid controller function prototype
     extern pidControllerFuncPtr pid_controller;
     extern uint8_t PIDweight[3];
+    extern bool motorLimitReached;
+    extern uint32_t rcModeActivationMask;
     float dT; // dT for pidLuxFloat
     float unittest_pidLuxFloat_lastError[3];
     float unittest_pidLuxFloat_delta1[3];
