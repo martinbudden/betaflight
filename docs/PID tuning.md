@@ -4,19 +4,17 @@ Every aspect of flight dynamics is controlled by the selected "PID controller". 
 responsible for reacting to your stick inputs and keeping the craft stable in the air by using the gyroscopes and/or
 accelerometers (depending on your flight mode).
 
-The "PIDs" are a set of tuning parameters which control the operation of the PID controller. The optimal PID settings
+The "PIDs" is a set of tuning parameters that control the operation of the PID controller. The optimal PID settings
 to use are different on every craft, so if you can't find someone with your exact setup who will share their settings
-with you, some trial and error is required to find the best performing PID settings.
+with you, some trial and error are required to find the best performing PID settings.
 
-A video on how to recognise and correct different flight problems caused by PID settings is available here:
-
-https://www.youtube.com/watch?v=YNzqTGEl2xQ
+A video on how to recognise and correct different flight problems caused by PID settings is [available here](https://www.youtube.com/watch?v=YNzqTGEl2xQ).
 
 Basically, the goal of the PID controller is to bring the craft's rotation rate in all three axes to the rate that
-you're commanding with your sticks. An error is computed which is the difference between your target rotation rate and
+you're commanding with your sticks. An error is computed, which is the difference between your target rotation rate and
 the actual one measured by the gyroscopes, and the controller tries to bring this error to zero.
 
-##PIDs
+## PIDs
 
 **The P term** controls the strength of the correction that is applied to bring the craft toward the target angle or
 rotation rate. If the P term is too low, the craft will be difficult to control as it won't respond quickly enough to
@@ -29,17 +27,17 @@ set too high, the craft will oscillate (but with slower oscillations than with P
 **The D term** attempts to increase system stability by monitoring the rate of change in the error. If the error is rapidly converging to zero, the D term causes the strength of the correction to be backed off in order to avoid overshooting the target.
 
 
-##TPA and TPA Breakpoint
+## TPA and TPA Breakpoint
 
 TPA stands for Throttle PID Attenuation and according to [AlexYork.net](http://blog.alexyorke.net/what-is-tpa/):
 
-> "TPA basically allows an aggressively tuned multi-rotor (one that feels very locked in) to reduce its PID gains when throttle is applied beyond the TPA threshold/breakpoint in order to eliminate fast oscillations.."
+> "TPA basically allows an aggressively tuned multi-rotor (one that feels very locked in) to reduce its PID gains when the throttle is applied beyond the TPA threshold/breakpoint in order to eliminate fast oscillations.."
 
 Note that TPA is set via CLI or on the PID TUNING tab of the GUI.  tpa_breakpoint is set via CLI
 
-Also note that TPA and tpa_breakpoint may not be used in certain PID Controllers.  Check the description on the individual controller.
+Also, note that TPA and tpa_breakpoint may not be used in certain PID Controllers.  Check the description on the individual controller.
 
-TPA applies a PID value reduction in relation to full Throttle. It is used to apply dampening of PID values as full throttle is reached.
+TPA applies a PID value reduction in relation to full throttle. It is used to apply dampening of PID values as full throttle is reached.
 
 **TPA** = % of dampening that will occur at full throttle.
 
@@ -77,14 +75,14 @@ This PID Controller is a direct port of the PID controller from MultiWii 2.3 and
 
 The algorithm is handling roll and pitch differently to yaw. Users with problems on yaw authority should try this one.
 
-In Horizon and Angle modes, this controller uses both the LEVEL "P" and "I" settings in order to tune the 
+In Horizon and Angle modes, this controller uses both the LEVEL "P" and "I" settings in order to tune the
 auto-leveling corrections in a similar way to the way that P and I settings are applied to roll and yaw axes in the acro
 flight modes. The LEVEL "D" term is used as a limiter to constrain the maximum correction applied by the LEVEL "P" term.
 
 ### PID controller "MWREWRITE"
 
 This is a newer PID controller that is derived from the one in MultiWii 2.3 and later. It works better from
-all accounts, and fixes some inherent problems in the way the old one worked. From reports, tuning is apparently easier, 
+all accounts, and fixes some inherent problems in the way the old one worked. From reports, tuning is apparently easier,
 and it tolerates a wider range of PID values well.
 
 In Angle mode, this controller uses the LEVEL "P" PID setting to decide how strong the auto-level correction should
@@ -98,7 +96,7 @@ This is a new floating point based PID controller. MW23 and MWREWRITE use intege
 slower 8-bit MultiWii controllers, but is less precise.
 
 This controller has code that attempts to compensate for variations in the looptime, which should mean that the PIDs
-don't have to be retuned when the looptime setting changes. 
+don't have to be retuned when the looptime setting changes.
 
 There were initially some problems with horizon mode, and sluggishness in acro mode, that were recently fixed by
 nebbian in v1.6.0.
@@ -115,22 +113,22 @@ the Angle mode. Note: There is currently a bug in the Configurator which shows t
 shows as 0.03 rather than 3.0).
 
 The transition between self-leveling and acro behavior in Horizon mode is controlled by the "sensitivity_horizon"
-parameter which is labeled "LEVEL Derivative" in the Cleanflight Configurator GUI. This sets the percentage of your
+parameter which is labeled "LEVEL Derivative" in the Betaflight Configurator GUI. This sets the percentage of your
 stick travel that should have self-leveling applied to it, so smaller values cause more of the stick area to fly using
-only the gyros. The default is 75% 
+only the gyros. The default is 75%
 
 For example, at a setting of "100" for "sensitivity_horizon", 100% self-leveling strength will be applied at center
 stick, 50% self-leveling will be applied at 50% stick, and no self-leveling will be applied at 100% stick. If
 sensitivity is decreased to 75, 100% self-leveling will be applied at center stick, 50% will be applied at 63%
 stick, and no self-leveling will be applied at 75% stick and onwards.
 
-## RC rate, Pitch and Roll Rates (P/R rate before they were separated), and Yaw rate
+## RC rate, Pitch and Roll rates (P/R rate) and Yaw rate
 
 ### RC Rate
 
-An overall multiplier on the RC stick inputs for pitch, rol;, and yaw. 
+An overall multiplier on the RC stick inputs for pitch, roll, and yaw.
 
-On PID Controller MW23 can be used to set the "feel" around center stick for small control movements. (RC Expo also affects this).For PID Controllers MWREWRITE and LUX, this basically sets the baseline stick sensitivity
+On PID Controller MW23 can be used to set the "feel" around center stick for small control movements. (RC Expo also affects this). For PID Controllers MWREWRITE and LUX, this basically sets the baseline stick sensitivity
 
 ### Pitch and Roll rates
 
